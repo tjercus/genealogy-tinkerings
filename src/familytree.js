@@ -3,7 +3,6 @@
  * @type {{people: *[], families: *[]}}
  */
 const familytree = {
-  families: [],
   people: [
     {id: "123abc", fatherId: "456dfa", motherId: "789wsh", lastname: "Valentijn", firstnames: ["Tjerk"], birthdate: "1976-05-18", deathdate: ""},
     {id: "456dfa", fatherId: "abc123", motherId: "def321", lastname: "Valentijn", firstnames: ["Leo", "Gerard"], birthdate: "1952-03-28", deathdate: ""},

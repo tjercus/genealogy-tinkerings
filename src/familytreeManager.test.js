@@ -14,7 +14,7 @@ describe("makeFamilies", () => {
   it("return all families for a list of people", () => {
     const fams = makeFamilies([walter, nora, abby, tjerk, tineke]);
     //expect(fams).toEqual({});
-    expect(fams.size).toEqual(3);
+    expect(fams.length).toEqual(3);
     const entries = fams.entries();
     const waltersFam = entries.next().value[1];
     expect(waltersFam.children.length).toEqual(1);

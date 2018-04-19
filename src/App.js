@@ -14,7 +14,7 @@ const PersonComponentStyle = {
 const FamilyComponentStyle = {
   border: "1px solid gray",
   margin: "1em",
-  width: "15em"
+  width: "25em"
 };
 
 const PersonComponent = ({person}) => (
@@ -42,27 +42,15 @@ class App extends Component {
     }
   }
 
-  // state = {
-  //   // treeView: sortPeopleFamilyStyle(enrichTree(tree)),
-  //   treeView: { families: [], people: [] }, //enrichTree(tree),
-  // };
-
-  // componentWillMount() {
-  //   this.setState({treeView: enrichTree(tree)}, () => {
-  //     console.log("componentWillMount", JSON.stringify(this.state.treeView));
-  //   });
-  // }
-
   // {this.state.treeView.people.map(person => <PersonComponent person={person} key={person.id} />)}
   render() {
-    // console.log("render", JSON.stringify(this.state.treeView));
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Functional programming with genealogy data</h1>
         </header>
         <article className="App-intro">
-          {this.state.treeView.families.forEach((family, key) => <FamilyComponent family={family} key={family.id} />)}
+          {this.state.treeView.families.map((family, key) => <FamilyComponent family={family} key={family.id} />)}
         </article>
       </div>
     );

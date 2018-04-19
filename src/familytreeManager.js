@@ -11,7 +11,7 @@ export const makeFamily = (person, people) => { return { id: uuidv1(),
   mother: findPersonById(person.motherId, people), children: findSiblingsForPerson(person, people) } };
 
 export const enrichTree = tree => {
-  let newTree = {...tree};
+  let newTree = Object.assign({}, tree);
   newTree.people.sort(isBornAfter);
   // TODO use Maybe type
   newTree.people.map(person => {
@@ -19,8 +19,7 @@ export const enrichTree = tree => {
     person.mother = (person.motherId) ? findPersonById(person.motherId, newTree.people) : makePerson();
     return person;
   });
-  newTree.families = makeFamilies(newTree.people);
-  // console.log("enrichTree returning stuff", JSON.stringify(newTree));
+  newTree["families"] = makeFamilies(newTree.people);
   return newTree;
 };
 
@@ -38,9 +37,11 @@ export const makeFamilies = people => {
         families.set(key, fam);
       }
     }
+    return person;
   });
-  // console.log("makeFamilies", families);
-  return families;
+  console.log("makeFamilies", Array.from(families.values()));
+  // return families;
+  return Array.from(families.values());
 };
 
 // export const getFamilyByChild = (childId, families) => families.find(family => family.childrenIds.includes(childId));
