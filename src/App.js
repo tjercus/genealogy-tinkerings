@@ -3,9 +3,15 @@ import "./App.css";
 
 import tree from "./familytree";
 
-import { enrichTree, sortPeopleFamilyStyle } from "./familytreeManager";
+import { enrichTree } from "./familytreeManager";
 
 const PersonComponentStyle = {
+  border: "1px solid gray",
+  margin: "1em",
+  width: "15em"
+};
+
+const FamilyComponentStyle = {
   border: "1px solid gray",
   margin: "1em",
   width: "15em"
@@ -19,24 +25,44 @@ const PersonComponent = ({person}) => (
     </ul>
   </section>);
 
+const FamilyComponent = ({family}) => (
+  <section id={`family-section-${family.id}`} style={FamilyComponentStyle}>
+    <ul>
+      <li>{family.father.firstnames.join(" ")} {family.father.lastname} AND {family.mother.firstnames.join(" ")} {family.mother.lastname}</li>
+      <li>{family.children.map(person => <PersonComponent person={person} key={person.id} />)}</li>
+    </ul>
+  </section>);
+
 class App extends Component {
 
-  state = {
-    treeView: sortPeopleFamilyStyle(enrichTree(tree)),
-    // treeView: enrichTree(tree),
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      treeView: enrichTree(tree),
+    }
+  }
 
-  // {this.state.treeView.people.map(person => person.firstnames.join(" "))};
-  // {this.state.treeView.people.map(person => <PersonComponent person={person} />)};
-  // console.log(this.state.treeView.people[0]);
+  // state = {
+  //   // treeView: sortPeopleFamilyStyle(enrichTree(tree)),
+  //   treeView: { families: [], people: [] }, //enrichTree(tree),
+  // };
+
+  // componentWillMount() {
+  //   this.setState({treeView: enrichTree(tree)}, () => {
+  //     console.log("componentWillMount", JSON.stringify(this.state.treeView));
+  //   });
+  // }
+
+  // {this.state.treeView.people.map(person => <PersonComponent person={person} key={person.id} />)}
   render() {
+    // console.log("render", JSON.stringify(this.state.treeView));
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Functional programming with genealogy data</h1>
         </header>
         <article className="App-intro">
-          {this.state.treeView.people.map(person => <PersonComponent person={person} key={person.id} />)}
+          {this.state.treeView.families.forEach((family, key) => <FamilyComponent family={family} key={family.id} />)}
         </article>
       </div>
     );
