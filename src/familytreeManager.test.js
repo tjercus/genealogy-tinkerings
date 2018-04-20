@@ -66,19 +66,19 @@ describe("isBornBefore", () => {
 
 describe("isParent", () => {
   it("father is parent of son", () => {
-    expect(isParent(tjerk, leo)).toBe(true);
+    expect(isParent(leo, tjerk)).toBe(true);
   });
   it("son is NOT a parent of father", () => {
-    expect(isParent(leo, tjerk)).toBe(false);
+    expect(isParent(tjerk, leo)).toBe(false);
   });
   it("p2 has no parents", () => {
     const p1 = {id: "dfgdfgf", lastname: "orphan2", firstnames: ["a"], birthdate: "1952-03-28", deathdate: ""};
     const p2 = {id: "345gdff", lastname: "orphan2", firstnames: ["b"], birthdate: "1976-05-18", deathdate: ""};
-    expect(isParent(p1, p2)).toBe(false);
     expect(isParent(p2, p1)).toBe(false);
+    expect(isParent(p1, p2)).toBe(false);
   });
   it("p1 is parent of p1, via mother", () => {
-    expect(isParent(tjerk, marianne)).toBe(true);
+    expect(isParent(marianne, tjerk)).toBe(true);
   });
 });
 
